@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGJ8Q2KBP2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-RGJ8Q2KBP2');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hidden thoughts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            white-space: pre-line;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>hidden thoughts</h2>
+    <input type="password" id="keyInput" placeholder="Inserisci la chiave">
+    <button onclick="decryptMessages()">Decifra</button>
+    <div id="messages"></div>
+    <div id="error" class="error"></div>
+
+    <script>
+        const encryptedMessages = [
+            { id : 1, text: ""}
+    ]
+
+        function decryptMessages() {
+            const key = document.getElementById("keyInput").value;
+            const messagesDiv = document.getElementById("messages");
+            const errorDiv = document.getElementById("error");
+            messagesDiv.innerHTML = "";
+            errorDiv.textContent = "";
+            let hasDecrypted = false;
+            
+            encryptedMessages.forEach(msg => {
+                try {
+                    const bytes = CryptoJS.AES.decrypt(msg.text, key);
+                    const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+                    if (decryptedText) {
+                        hasDecrypted = true;
+                        const messageElem = document.createElement("div");
+                        messageElem.className = "message";
+                        messageElem.textContent = decryptedText;
+                        messagesDiv.appendChild(messageElem);
+                    }
+                } catch (error) {
+                    console.error("Errore nella decrittazione", error);
+                }
+            });
+            
+            if (!hasDecrypted) {
+                errorDiv.textContent = "Chiave errata!";
+            }
+        }
+    </script>
+</body>
+</html>
+
