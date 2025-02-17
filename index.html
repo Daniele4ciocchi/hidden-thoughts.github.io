@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGJ8Q2KBP2"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-RGJ8Q2KBP2');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RGJ8Q2KBP2');
     </script>
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MPRHW8NC');
-    </script>
-    <!-- End Google Tag Manager -->
+    <script>(function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MPRHW8NC');</script>
+    <!-- Fine Google Tag Manager -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hidden thoughts</title>
+    <title>Hidden Thoughts</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
@@ -46,21 +45,22 @@
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPRHW8NC"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPRHW8NC"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- Fine Google Tag Manager (noscript) -->
 
-    <h2>hidden thoughts</h2>
+    <h2>Hidden Thoughts</h2>
     <input type="password" id="keyInput" placeholder="Inserisci la chiave">
-    <button onclick="decryptMessages()">Decifra</button>
+    <button id="decryptButton">Decifra</button>
     <div id="messages"></div>
     <div id="error" class="error"></div>
 
     <script>
         const encryptedMessages = [
             { id : 1, text: "U2FsdGVkX19xVyW6hBGG+79/MFEWvYxMRT7YQoOUCMd+hL3cOhNAPnL/1tBL2AVBhl1ZLNJlIcjgme/EnF+FmnbavZ1Wuo5ySNraEIps1kKU1TN4mAopfBzIjtMyGoM87iMpRIalH4bvU6KlhOBPN6n6ilrD+27Ey77R/HP4tQDmQrDXr77Z7PCQB7DHcqPRmfD8VZQGtmZp0TIQiEDmAuqjS2EOC99QisAAHWsPuQTRRVTvHMFDBkmzBtjDd5N9BG4PLCzELxOtBvpl5+rwb9udVh84S2NhuoOnoCww530aD2af03xMaASdL3hQwhK8pAm7IUEt7E71vLbo58dCN08oBtsp+8A5b2eDtV+XqnavGbbmRRC1tcVJR07Otdqb5xlxo773NWNGfJ6H2OiYt5tEnqhBNrqBn/KZsBjHaaPukY3H2gwRs3yW2H82xhh0Ci4Q7ryOcmJFzAqWYJOLAWvSbO2VVNUr/PmDb2dBTJW587hq7Ar8kfptVkBb0g2EhMQA7JsgGVGruYO+VbFq9PO+KEIrifgsi1ck/EuqhPv0eX98QeageTIx7TXw3N2oxY2iBRnq8nclf0WmnOOFlkhV8YROWWDP6xAQHf9BYN2BmGazyM7ntBTq1XbgsJGyKl1Q0VuSdJnV27Jwsule/nWqRad1SmBTx4MS/gH2OJmKfeCJaD4tvGmY0omHHXWZZdlLb6FlzU4RcKKhhFscZk2kwVryH48a7cNFLGUymN1O9uvznYbFnxn7zySU17Hfw24bOHj6p7h21i+BrbFoEN9QfJ8877ea/SYtGTq5bdET15LUiwioei4+KdVCqF3kHkp8hrAcbiAHG397B7HoHFf5nCoQfz4RXpvAmOIS99RGrZxCpE4iXysRIHqMvcyBYoEY2syUkvdCxoPhQcQnQZhRwkXlkAzpwx5gH34cJKFxUzFcCTUyaHjpgvzbWrqX+suAYE9/ueEXCtN4dPOfAfJWRoJKJjVCtO8gKpccuQJh5zqoL5WhYLWmWRb7QBAa"}
-    ]
+        ];
 
         function decryptMessages() {
             const key = document.getElementById("keyInput").value;
@@ -68,29 +68,38 @@
             const errorDiv = document.getElementById("error");
             messagesDiv.innerHTML = "";
             errorDiv.textContent = "";
+
             let hasDecrypted = false;
-            
+
+            // Tracciamento click su Google Analytics
+            gtag('event', 'click', {
+                'event_category': 'button',
+                'event_label': 'decrypt_button'
+            });
+
             encryptedMessages.forEach(msg => {
                 try {
                     const bytes = CryptoJS.AES.decrypt(msg.text, key);
                     const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+
                     if (decryptedText) {
+                        const messageElement = document.createElement("div");
+                        messageElement.className = "message";
+                        messageElement.textContent = decryptedText;
+                        messagesDiv.appendChild(messageElement);
                         hasDecrypted = true;
-                        const messageElem = document.createElement("div");
-                        messageElem.className = "message";
-                        messageElem.textContent = decryptedText;
-                        messagesDiv.appendChild(messageElem);
                     }
                 } catch (error) {
-                    console.error("Errore nella decrittazione", error);
+                    console.error("Errore durante la decriptazione:", error);
                 }
             });
-            
+
             if (!hasDecrypted) {
-                errorDiv.textContent = "Chiave errata!";
+                errorDiv.textContent = "Chiave errata o messaggi non disponibili.";
             }
         }
+
+        document.getElementById("decryptButton").addEventListener("click", decryptMessages);
     </script>
 </body>
 </html>
-
